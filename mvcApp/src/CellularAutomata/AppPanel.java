@@ -1,0 +1,169 @@
+/*
+ * Date: March 6th 2024
+ * Name: Nhat Tran
+ * Version: 0.1
+ * Changes: Implementing AppPanel.java
+ * */
+package CellularAutomata;
+
+import mvc.SafeFrame;
+import mvc.Utilities;
+import mvc.World;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.*;
+
+public class AppPanel extends JPanel implements ActionListener {
+
+    private String recentFName = null;
+    private CellularAutomata ca;
+    private CAView view;
+    public AppPanel() {
+        this.ca = new CellularAutomata();
+        this.view = new CAView(ca);
+        this.setLayout(new GridLayout(1, 2));
+        ControlPanel controls = new ControlPanel();
+        this.add(controls);
+        this.add(view);
+        SafeFrame frame = new SafeFrame();
+        Container cp = frame.getContentPane();
+        cp.add(this);
+        frame.setResizable(false);
+        frame.setJMenuBar(this.createMenuBar());
+        frame.setTitle("CellularAutomata");
+        frame.setSize(600, 460);
+        frame.setVisible(true);
+        World.PANEL_HEIGHT -= frame.getJMenuBar().getHeight();
+    }
+    protected JMenuBar createMenuBar() {
+        JMenuBar result = new JMenuBar();
+        JMenu fileMenu = Utilities.makeMenu("File", new String[]{"New", "Save", "Open", "Quit"}, this);
+        result.add(fileMenu);
+        JMenu editMenu = Utilities.makeMenu("Edit", new String[]{"Run1", "Run50", "Populate", "Clear"}, this);
+        result.add(editMenu);
+        JMenu helpMenu = Utilities.makeMenu("Help", new String[]{"About", "Help"}, this);
+        result.add(helpMenu);
+        return result;
+    }
+
+    public void actionPerformed(ActionEvent ae) {
+        String act = ae.getActionCommand();
+        try {
+            switch (act) {
+                case "Save" : {
+                    if (recentFName == null) {
+                        recentFName = Utilities.getFileName(null, false);
+                    }
+                    ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(recentFName));
+                    os.writeObject(this.ca);
+                    os.close();
+                    break;
+                }
+                case "Open" : {
+                    if (Utilities.confirm("Are you sure?")) {
+                        String fName = Utilities.getFileName(null, true);
+                        recentFName = fName;
+                        ObjectInputStream is = new ObjectInputStream(new FileInputStream(fName));
+                        ca =(CellularAutomata)is.readObject();
+                        is.close();
+                    }
+                    break;
+                }
+                case "New" : {
+                    if (Utilities.confirm("Are you sure?")) {
+                        recentFName = null;
+                        ca = new CellularAutomata();
+                        view.set(ca);
+                    }
+                    break;
+                }
+                case "Quit" : {
+                    if (Utilities.confirm("Are you sure?"))
+                        System.exit(0);
+                    break;
+                }
+                case "Run1" : {
+                    String input = (String)JOptionPane.showInputDialog(
+                            new JFrame(),
+                            "Enter program file name",
+                            "Input",
+                            JOptionPane.PLAIN_MESSAGE,
+                            null,
+                            null,
+                            ""
+                    );
+                    try { ca.read(input); }
+                    catch (IOException e) { e.printStackTrace(); }
+                    break;
+                }
+                case "Run50" : {
+                    ca.execute();
+                    break;
+                }
+                case "Populate" : {
+                    if (Utilities.confirm("Are you sure")) {
+                        recentFName = null;
+                        ca.clear();
+                    }
+                    break;
+                }
+                case "About" : {
+                    Utilities.inform("CellularAutomata v0.1");
+                    break;
+                }
+                case "Help" : {
+                    String[] actDesc = new String[]{
+                            "Run1: Read the inputted file and post it in the bottom right",
+                            "Run50: Run50 the file shown and display the result on the top right",
+                            "Clear: Clear the file from the program"
+                    };
+                    Utilities.inform(actDesc);
+                    break;
+                }
+            }
+        } catch (Exception ex) {
+            Utilities.error(ex); // all error handling done here!
+        }
+    }
+
+
+    public static void main(String[] args) {
+        AppPanel app = new AppPanel();
+    }
+
+    class ControlPanel extends JPanel {
+        public ControlPanel() {
+            JPanel p = new JPanel();
+            p.setLayout(new GridLayout(2, 2));
+            Dimension d = new Dimension();
+            d.setSize(400, 460);
+            p.setPreferredSize(new Dimension(d));
+            JPanel rn1 = new JPanel();
+            JPanel rn50 = new JPanel();
+            JPanel ppl = new JPanel();
+            JPanel clr = new JPanel();
+            JButton run1 = new JButton("Run1");
+            run1.addActionListener(AppPanel.this);
+            rn1.add(run1);
+            JButton run50 = new JButton("Run50");
+            run50.addActionListener(AppPanel.this);
+            rn50.add(run50);
+            JButton populate = new JButton("Populate");
+            populate.addActionListener(AppPanel.this);
+            ppl.add(populate);
+            JButton clear = new JButton("Clear");
+            clear.addActionListener(AppPanel.this);
+            clr.add(clear);
+            p.add(rn1);
+            p.add(rn50);
+            p.add(ppl);
+            p.add(clr);
+            this.add(p);
+        }
+    }
+
+}
+
