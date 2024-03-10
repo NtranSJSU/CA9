@@ -20,7 +20,7 @@ public class Publisher {
         subscribers.add(s);
     }
 
-    public void unSubscribe(Subscriber s) {
+    public void unsubscribe(Subscriber s) {
         subscribers.remove(s);
     }
 }

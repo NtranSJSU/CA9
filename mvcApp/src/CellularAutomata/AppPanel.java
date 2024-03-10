@@ -31,10 +31,10 @@ public class AppPanel extends JPanel implements ActionListener {
         SafeFrame frame = new SafeFrame();
         Container cp = frame.getContentPane();
         cp.add(this);
-        frame.setResizable(false);
+        frame.setResizable(true);
         frame.setJMenuBar(this.createMenuBar());
         frame.setTitle("CellularAutomata");
-        frame.setSize(600, 460);
+        frame.setSize(702, 502);
         frame.setVisible(true);
         World.PANEL_HEIGHT -= frame.getJMenuBar().getHeight();
     }
@@ -139,7 +139,7 @@ public class AppPanel extends JPanel implements ActionListener {
             JPanel p = new JPanel();
             p.setLayout(new GridLayout(2, 2));
             Dimension d = new Dimension();
-            d.setSize(400, 460);
+            d.setSize(400, 400);
             p.setPreferredSize(new Dimension(d));
             JPanel rn1 = new JPanel();
             JPanel rn50 = new JPanel();

@@ -12,8 +12,8 @@ import java.util.*;
 import mvc.*;
 
 public abstract class Grid extends Model {
-    static private int time = 0;
-    protected int dim = 20;
+    static private int time ;
+    protected int dim ;
     protected Cell[][] cells;
 
     public int getDim() { return dim; }
@@ -26,13 +26,20 @@ public abstract class Grid extends Model {
         this.dim = dim;
         cells = new Cell[dim][dim];
         populate();
+        notifySubscribers();
     }
     public Grid() { this(20); }
 
     protected void populate() {
-        // 1. use makeCell to fill in cells
-        // 2. use getNeighbors to set the neighbors field of each cell
-    }
+        for (int row=0;row<dim;row++){
+            for (int col=0;col<dim;col++) {
+                Cell cell=makeCell(true);
+                cells[row][col]=cell;
+                getNeighbors(cell,1);}
+            }
+        }
+
+
 
     // called when Populate button is clicked
     public void repopulate(boolean randomly) {
@@ -43,7 +50,6 @@ public abstract class Grid extends Model {
         }
         // notify subscribers
     }
-
 
     public Set<Cell> getNeighbors(Cell asker, int radius) {
         /*
@@ -57,9 +63,7 @@ public abstract class Grid extends Model {
 
     // overide these
     public int getStatus() { return 0; }
-    public Color getColor() { return Color.GREEN; }
 
-    // cell phases:
 
     public void observe() {
         // call each cell's observe method and notify subscribers
@@ -70,7 +74,7 @@ public abstract class Grid extends Model {
     }
 
     public void update() {
-        // ???
+
     }
 
     public void updateLoop(int cycles) {
@@ -83,4 +87,11 @@ public abstract class Grid extends Model {
             System.out.println("time = " + time);
         }
     }
-}
+    // 1. use makeCell to fill in cells
+        // 2. use getNeighbors to set the neighbors field of each cell
+    }
+
+
+// cell phases:
+
+

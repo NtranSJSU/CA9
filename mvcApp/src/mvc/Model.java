@@ -3,10 +3,21 @@
  * Name: Nhat Tran
  * Version: 0.1
  * Changes: Implementing Model.java
- * */
+ *
+ * Date: March 9th 2024
+ * Name: Agrika Gupta
+ * Version: 0.1
+ * Changes: Serializable interface implementation,publisher extension */
 package mvc;
-public abstract class Model{
+
+import java.io.Serializable;
+
+public abstract class Model extends Publisher implements Serializable {
     private static final long serialVersionUID = 1L;
+
+
+
+
 
     private String fileName = null;
     private Boolean unsavedChanges = false;
@@ -18,6 +29,8 @@ public abstract class Model{
     public void changed() {
         unsavedChanges = true;
     }
+
+
 
 
 

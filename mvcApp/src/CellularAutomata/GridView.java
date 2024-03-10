@@ -8,20 +8,44 @@ package CellularAutomata;
 
 import mvc.*;
 
+import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
+
 public class GridView  extends View {
+    int row, col;
+    private CellView[][] cellViews;
 
-    private CellView cellViews[][];
+    public GridView(Grid myGrid) {
+        super(myGrid);
+        row=myGrid.getDim();
+        col=myGrid.getDim();
+        cellViews=new CellView[row][col];
+        this.setLayout(new GridLayout(row,col));
+        this.setBackground(Color.WHITE);
 
-    public GridView(Model model) {
-        /*
-        Cell cell = new CellView(((Grid)model).getCell(row, col)
-        cellViews[row][col] = cell
-        set cell.row and cell.col here
-        */
+        setSize(500, 500);
+        setVisible(true);
+        for (int a=0;a<row;a++){
+            for (int b=0;b<col;b++){
+                cellViews[a][b]=new CellView(myGrid.getCell(a,b));
+                this.add(cellViews[a][b]);
+            }
+        }
+        update();
     }
 
-    public void update(String msg, Object oldState, Object newState) {
+    public void update() {
         // call update method of each CellView
+        for (int a = 0; a < row; a++) {
+            for (int b = 0; b < col; b++) {
+                cellViews[a][b].update(); // Assuming CellView has an update method
+            }
+        }
+        repaint();
     }
+
+
+
 
 }

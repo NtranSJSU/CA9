@@ -12,11 +12,17 @@ import java.io.*;
 import mvc.*;
 
 abstract class Cell extends Publisher implements Serializable {
-
-    protected int row = 0, col = 0;
+    protected Color color=Color.WHITE;
+    protected int row, col;
     protected Set<Cell> neighbors = new HashSet<Cell>();
-    protected Grid myGrid = null;
+    protected Grid myGrid;
     protected Cell partner = null;
+
+    public Cell(Grid myGrid,int a,int b){
+        row=a;
+        col=b;
+        this.myGrid=myGrid;
+    }
 
 
     // choose a random neighbor as a partner
