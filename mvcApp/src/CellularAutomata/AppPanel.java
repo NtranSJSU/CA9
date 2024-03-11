@@ -16,6 +16,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 
+/**
+ * Name: Agrika Gupta
+ * Date: 10/3/2024
+ * Changes: Display GridView of Grid with CellViews of individual Cell composition
+ */
+
 public class AppPanel extends JPanel implements ActionListener {
 
     private String recentFName = null;
