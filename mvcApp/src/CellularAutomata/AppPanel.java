@@ -118,7 +118,7 @@ public class AppPanel extends JPanel implements ActionListener {
                             "Run1: Read the inputted file and post it in the bottom right",
                             "Run50: Run50 the file shown and display the result on the top right",
                             "Clear: Clear the file from the program",
-                            "Populate: "
+                            "Populate: Randomly toggle cells"
                     };
                     Utilities.inform(actDesc);
                     break;
