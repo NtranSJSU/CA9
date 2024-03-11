@@ -18,12 +18,6 @@ public class View extends JPanel implements Subscriber {
         model=a;
         model.subscribe(this);
     }
-
-    public View()
-    {
-        model=null;
-
-    }
     public void update() {
         repaint();
     }

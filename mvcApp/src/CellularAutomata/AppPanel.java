@@ -100,10 +100,10 @@ public class AppPanel extends JPanel implements ActionListener {
                     break;
                 }
                 case "Run50" : {
-                    ca.execute();
+                    ca.updateLoop(50);
                     break;
                 }
-                case "Populate" : {
+                case "Clear" : {
                     if (Utilities.confirm("Are you sure")) {
                         recentFName = null;
                         ca.clear();

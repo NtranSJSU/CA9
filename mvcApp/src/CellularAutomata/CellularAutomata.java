@@ -17,10 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CellularAutomata extends Grid{
-    public int ip;
-    public boolean halt;
-    public int size;
-    public int[] memory;
     List<String> commands;
     int row=0;
     int col=0;
@@ -36,39 +32,17 @@ public class CellularAutomata extends Grid{
         return new CellularAutomataCell(this,row,col);
     }
 
-    public void clear() {
-        for (int a=0;a<dim;a++) {
-            for (int b = 0; b < dim; b++) {
-                (cells[a][b]).color= Color.WHITE;
-            }
-        }
-        notifySubscribers();
-    }
+
 
 
     public CellularAutomata() {
         super();
-        ip = 0;
-        halt = false;
-        size = 32;
-        memory = new int[size];
-        commands = new ArrayList<>();
     }
 
-    public CellularAutomata(String file_path) throws Exception {
-        ip = 0;
-        halt = false;
-        size = 32;
-        memory = new int[size];
-        read(file_path);
-        notifySubscribers();
-    }
-
-    public void execute() {
-        while (!halt) {
-            ip++;
-            notifySubscribers();
-        }
+    @Override
+    public void clear() {
+        row=0; col=0;
+        super.clear();
     }
 
     public void read(String file_path) throws Exception {

@@ -24,12 +24,17 @@ public abstract class Grid extends Model {
 
     public Grid(int dim) {
         this.dim = dim;
-        cells = new Cell[dim][dim];
+        cells=new Cell[dim][dim];
         populate();
         notifySubscribers();
     }
-    public Grid() { this(20); }
+    public Grid() { this(20);
+    }
 
+    public void clear() {
+        populate();
+        notifySubscribers();
+    }
     protected void populate() {
         for (int row=0;row<dim;row++){
             for (int col=0;col<dim;col++) {
@@ -62,7 +67,7 @@ public abstract class Grid extends Model {
     }
 
     // overide these
-    public int getStatus() { return 0; }
+    public int getStatus(Cell asker) { return asker.getStatus(); }
 
 
     public void observe() {

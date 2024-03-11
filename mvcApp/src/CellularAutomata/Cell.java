@@ -17,7 +17,7 @@ abstract class Cell extends Publisher implements Serializable {
     protected Set<Cell> neighbors = new HashSet<Cell>();
     protected Grid myGrid;
     protected Cell partner = null;
-
+    private int status=0;
     public Cell(Grid myGrid,int a,int b){
         row=a;
         col=b;
@@ -49,12 +49,12 @@ abstract class Cell extends Publisher implements Serializable {
 
     public Color getColor(){
 
-        return null;
+        return color;
     }
 
-    public String getStatus() {
+    public int getStatus() {
 
-        return null;
+        return status;
     }
 
     // observer neighbors' states

@@ -5,10 +5,11 @@ import CellularAutomata.Grid;
 import java.awt.*;
 
 public class CellularAutomataCell extends Cell {
-    protected Color color=Color.WHITE;
+
 
     public CellularAutomataCell(Grid myGrid, int a, int b) {
         super(myGrid, a, b);
+        notifySubscribers();
     }
 
 
@@ -36,11 +37,6 @@ public class CellularAutomataCell extends Cell {
             color=Color.RED;
         else
             color=color.WHITE;
-    }
-
-    @Override
-    public Color getColor() {
-        return color;
     }
 
     @Override

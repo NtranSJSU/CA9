@@ -16,12 +16,9 @@ import mvc.*;
 public class CellView extends JButton implements ActionListener, Subscriber {
     private Cell myCell;
 
-
-
     public CellView(Cell c) {
         myCell = c;
         setSize(25, 25);
-        setOpaque(true);
         setBorderPainted(true);
         Border blackline = BorderFactory.createLineBorder(Color.black);
         setBorder(blackline);
@@ -29,24 +26,15 @@ public class CellView extends JButton implements ActionListener, Subscriber {
         if (c != null) { c.subscribe(this);}
         this.addActionListener(this);
     }
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
         myCell.nextState(); // changes the state of myCell
-        setBackground(myCell.getColor());
-        setBorder(BorderFactory.createLineBorder(Color.black));
-        setText("" + myCell.getStatus());
     }
-
-    // called by notifySubscribers and GridView.update
-
 
     @Override
-    public void update() {
+    public void update() {  myCell=myCell.myGrid.getCell(myCell.row,myCell.col);
         repaint();
     }
-
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
@@ -54,55 +42,21 @@ public class CellView extends JButton implements ActionListener, Subscriber {
         int borderWidth = 1; // Adjust the border width as needed
         int width = getWidth();
         int height = getHeight();
-
         // Draw the filled rectangle
         g.setColor(myCell.getColor()); // Change the color as needed
         g.fillRect(borderWidth, borderWidth, width - 2 * borderWidth, height - 2 * borderWidth);
-
-        // Draw the border
-        g.setColor(Color.BLACK); // Change the color as needed
         g.drawRect(0, 0, width , height );
-    }
-    public void setCell(Cell a){myCell=a;
-    }
+        String statusText = String.valueOf(myCell.getStatus());
+        g.setColor(Color.BLACK); // Change the color as needed
+        g.drawString(statusText, width / 2 - g.getFontMetrics().stringWidth(statusText) / 2, height/2);    }
+
 }
 
 /*
 Some other files needed:
-
    GridFactory.java
    GridPanel.java
    ClearCommand.java
    RunCommand.java   // for Run1 and Run50 buttons
    PopulateCommand.java
-
-
-       public StoplightView(Stoplight light) {
-        this.light = light;
-        light.subscribe(this);
-        setSize(500, 500);
-        Border blackline = BorderFactory.createLineBorder(Color.black);
-        setBorder(blackline);
-        setBackground(Color.LIGHT_GRAY);
-    }
-
-    public void update() {
-        repaint();
-    }
-
-    public void setLight(Stoplight newLight) {
-        light.unsubscribe(this);
-        light = newLight;
-        light.subscribe(this);
-        repaint();
-    }
-
-    public void paintComponent(Graphics gc) {
-        super.paintComponent(gc);
-        Color oldColor = gc.getColor();
-        StoplightComponent lightComponent = new StoplightComponent(light);
-        lightComponent.paintComponent(gc);
-        gc.setColor(oldColor);
-    }
-
 */

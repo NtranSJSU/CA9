@@ -42,7 +42,7 @@ public class GridView  extends View {
                 cellViews[a][b].update(); // Assuming CellView has an update method
             }
         }
-        repaint();
+        super.update();
     }
 
 
