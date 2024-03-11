@@ -118,7 +118,8 @@ public class AppPanel extends JPanel implements ActionListener {
                     String[] actDesc = new String[]{
                             "Run1: Read the inputted file and post it in the bottom right",
                             "Run50: Run50 the file shown and display the result on the top right",
-                            "Clear: Clear the file from the program"
+                            "Clear: Clear the file from the program",
+                            "Populate: "
                     };
                     Utilities.inform(actDesc);
                     break;
