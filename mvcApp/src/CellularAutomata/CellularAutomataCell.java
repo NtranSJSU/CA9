@@ -4,6 +4,15 @@ import CellularAutomata.Cell;
 import CellularAutomata.Grid;
 import java.awt.*;
 
+/**
+ * Name: Agrika Gupta
+ * Date: 10/3/2024
+ * Changes: Show Status as Text and Colors in Cells. Implement clear() button for
+ * CA customization. Changed button implementations for Run50-UpdateLoop(50)
+ * and Clear-clear(). Updated CellView and GridView update() methods
+ * as subscribers.
+ */
+
 public class CellularAutomataCell extends Cell {
 
 
