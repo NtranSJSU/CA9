@@ -92,17 +92,7 @@ public class AppPanel extends JPanel implements ActionListener {
                     break;
                 }
                 case "Run1" : {
-                    String input = (String)JOptionPane.showInputDialog(
-                            new JFrame(),
-                            "Enter program file name",
-                            "Input",
-                            JOptionPane.PLAIN_MESSAGE,
-                            null,
-                            null,
-                            ""
-                    );
-                    try { ca.read(input); }
-                    catch (IOException e) { e.printStackTrace(); }
+                    ca.updateLoop(1);
                     break;
                 }
                 case "Run50" : {
@@ -115,6 +105,9 @@ public class AppPanel extends JPanel implements ActionListener {
                         ca.clear();
                     }
                     break;
+                }
+                case "Populate" : {
+                    ca.repopulate(true);
                 }
                 case "About" : {
                     Utilities.inform("CellularAutomata v0.1");
