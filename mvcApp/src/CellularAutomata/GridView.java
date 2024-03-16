@@ -15,15 +15,12 @@ import java.awt.*;
 public class GridView  extends View {
     int row, col;
     private CellView[][] cellViews;
-
     public GridView(Grid myGrid) {
         super(myGrid);
         row=myGrid.getDim();
         col=myGrid.getDim();
         cellViews=new CellView[row][col];
         this.setLayout(new GridLayout(row,col));
-        this.setBackground(Color.WHITE);
-
         setSize(500, 500);
         setVisible(true);
         for (int a=0;a<row;a++){
@@ -35,6 +32,7 @@ public class GridView  extends View {
         update();
     }
 
+    @Override
     public void update() {
         // call update method of each CellView
         for (int a = 0; a < row; a++) {
@@ -44,8 +42,4 @@ public class GridView  extends View {
         }
         super.update();
     }
-
-
-
-
 }

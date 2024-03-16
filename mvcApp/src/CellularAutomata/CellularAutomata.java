@@ -23,51 +23,14 @@ import java.util.List;
  */
 
 public class CellularAutomata extends Grid{
-    List<String> commands;
-    int row=0;
-    int col=0;
-
-
-
     @Override
-    public Cell makeCell(boolean uniform) {
-        if (0<col && col<20)
-            col++;
-        else if (0<row && row<20)
-            row++;
+    public Cell makeCell(Grid cellularAutomata,int row, int col) {
         return new CellularAutomataCell(this,row,col);
     }
-
-
-
-
     public CellularAutomata() {
         super();
     }
-
     @Override
     public void clear() {
-        row=0; col=0;
-        super.clear();
-    }
-
-    public void read(String file_path) throws Exception {
-        FileInputStream fileInputStream = new FileInputStream(file_path);
-        InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
-        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-        // Read each line from the file
-        String line;
-        commands = new ArrayList<>();
-        while ((line=bufferedReader.readLine()) != null) {
-            commands.add(line);
-        }
-
-        // Close the resources
-        bufferedReader.close();
-        inputStreamReader.close();
-        fileInputStream.close();
-        notifySubscribers();
-    }
-
+        super.clear();}
 }

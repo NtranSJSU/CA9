@@ -19,9 +19,7 @@ public abstract class Grid extends Model {
     public int getDim() { return dim; }
     public int getTime() { return time; }
     public Cell getCell(int row, int col) { return cells[row][col]; }
-    public abstract Cell makeCell(boolean uniform);
-
-
+    public abstract Cell makeCell(Grid myGrid, int row, int col);
     public Grid(int dim) {
         this.dim = dim;
         cells=new Cell[dim][dim];
@@ -30,22 +28,18 @@ public abstract class Grid extends Model {
     }
     public Grid() { this(20);
     }
-
     public void clear() {
-        populate();
+
         notifySubscribers();
     }
+
     protected void populate() {
         for (int row=0;row<dim;row++){
             for (int col=0;col<dim;col++) {
-                Cell cell=makeCell(true);
-                cells[row][col]=cell;
-                getNeighbors(cell,1);}
+                cells[row][col]=makeCell(this,row,col);
+                getNeighbors(cells[row][col],1);}
             }
         }
-
-
-
     // called when Populate button is clicked
     public void repopulate(boolean randomly) {
         if (randomly) {
@@ -55,7 +49,6 @@ public abstract class Grid extends Model {
         }
         // notify subscribers
     }
-
     public Set<Cell> getNeighbors(Cell asker, int radius) {
         /*
         return the set of all cells that can be reached from the asker in radius steps.
@@ -65,23 +58,17 @@ public abstract class Grid extends Model {
         */
         return null;
     }
-
     // overide these
     public int getStatus(Cell asker) { return asker.getStatus(); }
-
-
     public void observe() {
         // call each cell's observe method and notify subscribers
     }
-
     public void interact() {
         // ???
     }
-
     public void update() {
 
     }
-
     public void updateLoop(int cycles) {
         observe();
         for(int cycle = 0; cycle < cycles; cycle++) {

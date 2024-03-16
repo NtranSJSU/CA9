@@ -26,6 +26,6 @@ public class View extends JPanel implements Subscriber {
         model.unsubscribe(this);
         model = newLight;
         model.subscribe(this);
-        repaint();
+        update();
     }
 }
