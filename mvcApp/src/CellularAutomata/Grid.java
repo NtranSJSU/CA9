@@ -29,7 +29,7 @@ public abstract class Grid extends Model {
     public Grid() { this(20);
     }
     public void clear() {
-
+        populate();
         notifySubscribers();
     }
 

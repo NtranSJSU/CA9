@@ -14,10 +14,23 @@ import java.awt.*;
  */
 
 public class CellularAutomataCell extends Cell {
+    Color color=Color.white;
+    int status=0;
     public CellularAutomataCell(CellularAutomata myGrid, int a, int b) {
         super(myGrid, a, b);
         notifySubscribers();
     }
+
+    @Override
+    public Color getColor() {
+        return color;
+    }
+
+    @Override
+    public int getStatus() {
+        return status;
+    }
+
     @Override
     public void observe() {
 

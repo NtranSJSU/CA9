@@ -12,12 +12,11 @@ import java.io.*;
 import mvc.*;
 
 abstract class Cell extends Publisher implements Serializable {
-    protected Color color=Color.WHITE;
     protected int row, col;
     protected Set<Cell> neighbors = new HashSet<Cell>();
     protected Grid myGrid;
     protected Cell partner = null;
-    int status=0;
+
     public Cell(Grid myGrid,int a,int b){
         row=a;
         col=b;
@@ -27,15 +26,14 @@ abstract class Cell extends Publisher implements Serializable {
 
     // choose a random neighbor as a partner
     public void choosePartner() {
-        if (partner == null && neighbors != null) {
-			/*
-			Set partner to null
-			Convert neighbors set to a local array
-			Starting at a random position in the array search for a neighbor without a partner
-			Make the first such neighbor (if any) the partner and set its partner field to this
-			*/
+        if (partner==null && neighbors != null) {
+            Cell[] array = new Cell[neighbors.size()];
+            neighbors.toArray(array);
+            while (partner==null) {
+                int rand=(new Random()).nextInt(0,neighbors.size());
+                this.partner= array[rand];
+            }
         }
-
     }
 
     public void unpartner() {
@@ -47,15 +45,9 @@ abstract class Cell extends Publisher implements Serializable {
         }
     }
 
-    public Color getColor(){
+    public abstract Color getColor();
 
-        return color;
-    }
-
-    public int getStatus() {
-
-        return status;
-    }
+    public abstract int getStatus();
 
     // observer neighbors' states
     public abstract void observe();
