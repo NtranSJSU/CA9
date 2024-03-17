@@ -53,6 +53,9 @@ public class CellularAutomataCell extends Cell {
     }
     @Override
     public void reset(boolean randomly) {
-
+        if (!randomly) {
+            this.color=Color.white;
+            this.status=0;
+        }
     }
 }

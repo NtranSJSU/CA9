@@ -30,7 +30,5 @@ public class CellularAutomata extends Grid{
     public CellularAutomata() {
         super();
     }
-    @Override
-    public void clear() {
-        super.clear();}
+
 }

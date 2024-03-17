@@ -29,7 +29,13 @@ public abstract class Grid extends Model {
     public Grid() { this(20);
     }
     public void clear() {
-        populate();
+        for (int row = 0; row < dim; row++) {
+            for (int col = 0; col < dim; col++) {
+                // Reset the state of each cell to its initial state
+                cells[row][col].reset(false);
+                cells[row][col].notifySubscribers();
+            }
+        }
         notifySubscribers();
     }
 

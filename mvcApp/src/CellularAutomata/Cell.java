@@ -21,6 +21,7 @@ abstract class Cell extends Publisher implements Serializable {
         row=a;
         col=b;
         this.myGrid=myGrid;
+        notifySubscribers();
     }
 
 
@@ -34,6 +35,7 @@ abstract class Cell extends Publisher implements Serializable {
                 this.partner= array[rand];
             }
         }
+        notifySubscribers();
     }
 
     public void unpartner() {
@@ -43,6 +45,7 @@ abstract class Cell extends Publisher implements Serializable {
             }
             partner = null;
         }
+        notifySubscribers();
     }
 
     public abstract Color getColor();

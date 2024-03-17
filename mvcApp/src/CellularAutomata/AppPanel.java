@@ -91,6 +91,7 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener {
                         recentFName = null;
                         ca = new CellularAutomata();
                         this.setModel(ca);
+                        ca.setUnsavedChanges(false);
                     }
                     break;
                 }
