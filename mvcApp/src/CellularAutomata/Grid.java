@@ -43,6 +43,7 @@ public abstract class Grid extends Model {
         for (int row=0;row<dim;row++){
             for (int col=0;col<dim;col++) {
                 cells[row][col]=makeCell(this,row,col);
+                cells[row][col].notifySubscribers();
                 getNeighbors(cells[row][col],1);}
             }
         }

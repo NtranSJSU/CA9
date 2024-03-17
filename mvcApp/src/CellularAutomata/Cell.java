@@ -21,6 +21,7 @@ abstract class Cell extends Publisher implements Serializable {
         row=a;
         col=b;
         this.myGrid=myGrid;
+        neighbors=myGrid.getNeighbors(this,1);
         notifySubscribers();
     }
 
