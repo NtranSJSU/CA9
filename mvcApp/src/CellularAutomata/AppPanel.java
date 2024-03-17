@@ -6,9 +6,7 @@
  * */
 package CellularAutomata;
 
-import mvc.SafeFrame;
-import mvc.Utilities;
-import mvc.World;
+import mvc.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,14 +20,14 @@ import java.io.*;
  * Changes: Display GridView of Grid with CellViews of individual Cell composition
  */
 
-public class AppPanel extends JPanel implements ActionListener {
+public class AppPanel extends JPanel implements Subscriber, ActionListener {
 
     private String recentFName = null;
-    private CellularAutomata ca;
+    private Model ca;
     private CAView view;
     public AppPanel() {
         this.ca = new CellularAutomata();
-        this.view = new CAView(ca);
+        this.view = new CAView((CellularAutomata) ca);
         this.setLayout(new GridLayout(1, 2));
         ControlPanel controls = new ControlPanel();
         this.add(controls);
@@ -43,6 +41,7 @@ public class AppPanel extends JPanel implements ActionListener {
         frame.setSize(702, 502);
         frame.setVisible(true);
         World.PANEL_HEIGHT -= frame.getJMenuBar().getHeight();
+        this.ca.subscribe(this);
     }
     protected JMenuBar createMenuBar() {
         JMenuBar result = new JMenuBar();
@@ -53,6 +52,15 @@ public class AppPanel extends JPanel implements ActionListener {
         JMenu helpMenu = Utilities.makeMenu("Help", new String[]{"About", "Help"}, this);
         result.add(helpMenu);
         return result;
+    }
+
+    public void setModel(Model newModel) {
+        this.ca.unsubscribe(this);
+        this.ca = newModel;
+        this.ca.subscribe(this);
+        // view must also unsubscribe then resubscribe:
+        view.setModel(this.ca);
+        ca.changed();
     }
 
     public void actionPerformed(ActionEvent ae) {
@@ -82,7 +90,7 @@ public class AppPanel extends JPanel implements ActionListener {
                     if (Utilities.confirm("Are you sure?")) {
                         recentFName = null;
                         ca = new CellularAutomata();
-                        view.set(ca);
+                        this.setModel(ca);
                     }
                     break;
                 }
@@ -92,22 +100,22 @@ public class AppPanel extends JPanel implements ActionListener {
                     break;
                 }
                 case "Run1" : {
-                    ca.updateLoop(1);
+                    ((CellularAutomata)ca).updateLoop(1);
                     break;
                 }
                 case "Run50" : {
-                    ca.updateLoop(50);
+                    ((CellularAutomata)ca).updateLoop(50);
                     break;
                 }
                 case "Clear" : {
                     if (Utilities.confirm("Are you sure")) {
                         recentFName = null;
-                        ca.clear();
+                        ((CellularAutomata)ca).clear();
                     }
                     break;
                 }
                 case "Populate" : {
-                    ca.repopulate(true);
+                    ((CellularAutomata)ca).repopulate(true);
                 }
                 case "About" : {
                     Utilities.inform("CellularAutomata v0.1");
@@ -132,6 +140,11 @@ public class AppPanel extends JPanel implements ActionListener {
 
     public static void main(String[] args) {
         AppPanel app = new AppPanel();
+    }
+
+    @Override
+    public void update() {
+        repaint();
     }
 
     class ControlPanel extends JPanel {

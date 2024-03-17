@@ -17,8 +17,4 @@ public class CAView extends GridView {
         super(ca);
     }
 
-    public void set(CellularAutomata ca) {
-        setModel(ca);
-        update();
-    }
 }
