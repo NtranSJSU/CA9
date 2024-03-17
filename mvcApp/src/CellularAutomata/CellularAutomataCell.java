@@ -14,7 +14,7 @@ import java.awt.*;
  */
 
 public class CellularAutomataCell extends Cell {
-    Color color=Color.white;
+    Color color=Color.RED;
     int status=0;
     public CellularAutomataCell(CellularAutomata myGrid, int a, int b) {
         super(myGrid, a, b);
@@ -44,12 +44,10 @@ public class CellularAutomataCell extends Cell {
     }
     @Override
     public void nextState() {
-        if (color==Color.WHITE)
+        if (color==Color.RED)
             color=Color.GREEN;
-        else if (color==color.GREEN)
-            color=Color.RED;
         else
-            color=color.WHITE;
+            color=Color.RED;
     }
     @Override
     public void reset(boolean randomly) {
