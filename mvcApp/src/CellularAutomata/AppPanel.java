@@ -60,6 +60,7 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener {
         this.ca.subscribe(this);
         // view must also unsubscribe then resubscribe:
         view.setModel(this.ca);
+        update();
         ca.changed();
     }
 
@@ -117,6 +118,7 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener {
                 }
                 case "Populate" : {
                     ((CellularAutomata)ca).repopulate(true);
+                    break;
                 }
                 case "About" : {
                     Utilities.inform("CellularAutomata v0.1");

@@ -3,6 +3,7 @@ package CellularAutomata;
 import CellularAutomata.Cell;
 import CellularAutomata.Grid;
 import java.awt.*;
+import java.util.Random;
 
 /**
  * Name: Agrika Gupta
@@ -16,6 +17,7 @@ import java.awt.*;
 public class CellularAutomataCell extends Cell {
     Color color=Color.RED;
     int status=0;
+    int ambience;
     public CellularAutomataCell(CellularAutomata myGrid, int a, int b) {
         super(myGrid, a, b);
         notifySubscribers();
@@ -44,16 +46,29 @@ public class CellularAutomataCell extends Cell {
     }
     @Override
     public void nextState() {
-        if (color==Color.RED)
-            color=Color.GREEN;
-        else
-            color=Color.RED;
+        if (status==0) {
+            color = Color.GREEN;
+            status=1;
+        }
+        else if (status==1) {
+            color = Color.RED;
+            status=0;
+        }
     }
     @Override
     public void reset(boolean randomly) {
         if (!randomly) {
-            this.color=Color.white;
+            this.color=Color.RED;
             this.status=0;
+        } else {
+            int rand=(new Random()).nextInt(0,2);
+            if (rand==1) {
+                this.color=Color.GREEN;
+                this.status=1;
+            } else{
+                this.color=Color.RED;
+                this.status=0;
+            }
         }
     }
 }
