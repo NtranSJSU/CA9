@@ -41,7 +41,14 @@ public class CellularAutomataCell extends Cell {
                 ambience++;
             }
         }
+        notifySubscribers();
     }
+
+    public int getAmbience() {
+        observe();
+        return ambience;
+    }
+
     @Override
     public void interact() {
 
@@ -56,6 +63,7 @@ public class CellularAutomataCell extends Cell {
             status=1;
             color=Color.GREEN;
         }
+        notifySubscribers();
     }
     @Override
     public void nextState() {

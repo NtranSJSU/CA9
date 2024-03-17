@@ -27,7 +27,7 @@ public class CellView extends JButton implements ActionListener, Subscriber {
             c.subscribe(this);
         }
         this.addActionListener(this);
-        String statusText = String.valueOf(myCell.getStatus());
+        String statusText = String.valueOf(((CellularAutomataCell)myCell).getStatus());
         setText(statusText);
         setBackground(myCell.getColor());
         update();
