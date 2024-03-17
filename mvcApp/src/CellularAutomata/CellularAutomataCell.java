@@ -17,7 +17,7 @@ import java.util.Random;
 public class CellularAutomataCell extends Cell {
     Color color=Color.RED;
     int status=0;
-    int ambience;
+    int ambience=0;
     public CellularAutomataCell(CellularAutomata myGrid, int a, int b) {
         super(myGrid, a, b);
         notifySubscribers();
@@ -35,7 +35,12 @@ public class CellularAutomataCell extends Cell {
 
     @Override
     public void observe() {
-
+        ambience= 0;
+        for (Cell neighbor : neighbors) {
+            if (neighbor.getStatus() == 1) {
+                ambience++;
+            }
+        }
     }
     @Override
     public void interact() {
@@ -43,6 +48,14 @@ public class CellularAutomataCell extends Cell {
     }
     @Override
     public void update() {
+        if (ambience>=0 && ambience<=1){
+            reset(false);
+        } else if (ambience >=4 && ambience<=8) {
+            reset(false);
+        } else if (ambience==3) {
+            status=1;
+            color=Color.GREEN;
+        }
     }
     @Override
     public void nextState() {
@@ -54,6 +67,7 @@ public class CellularAutomataCell extends Cell {
             color = Color.RED;
             status=0;
         }
+        notifySubscribers();
     }
     @Override
     public void reset(boolean randomly) {
@@ -70,5 +84,6 @@ public class CellularAutomataCell extends Cell {
                 this.status=0;
             }
         }
+        notifySubscribers();
     }
 }

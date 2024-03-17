@@ -44,7 +44,7 @@ public abstract class Grid extends Model {
             for (int col=0;col<dim;col++) {
                 cells[row][col]=makeCell(this,row,col);
                 cells[row][col].notifySubscribers();
-                getNeighbors(cells[row][col],1);}
+                }
             }
         }
     // called when Populate button is clicked
@@ -65,18 +65,49 @@ public abstract class Grid extends Model {
         Tricky part: cells in row/col 0 or dim - 1.
         The asker is not a neighbor of itself.
         */
-        return null;
+        Set<Cell> neighbors = new HashSet<>();
+        int row = asker.row;
+        int col = asker.col;
+
+        // Iterate over cells within the specified radius
+        for (int i = -radius; i <= radius; i++) {
+            for (int j = -radius; j <= radius; j++) {
+                // Skip the center cell itself
+                if (i == 0 && j == 0) {
+                    continue;
+                }
+                int newRow = (row + i + dim) % dim;
+                int newCol = (col + j + dim) % dim;
+                neighbors.add(this.getCell(newRow, newCol));
+            }
+        }
+
+        return neighbors;
+
     }
     // overide these
     public int getStatus(Cell asker) { return asker.getStatus(); }
     public void observe() {
         // call each cell's observe method and notify subscribers
+        for (int row=0;row<dim;row++) {
+            for (int col = 0; col < dim; col++) {
+                cells[row][col].observe();
+                cells[row][col].notifySubscribers();
+            }
+        }
+        notifySubscribers();
     }
     public void interact() {
         // ???
     }
     public void update() {
-
+        for (int row=0;row<dim;row++) {
+            for (int col = 0; col < dim; col++) {
+                cells[row][col].update();
+                cells[row][col].notifySubscribers();
+            }
+        }
+        notifySubscribers();
     }
     public void updateLoop(int cycles) {
         observe();
