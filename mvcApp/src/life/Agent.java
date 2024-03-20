@@ -1,7 +1,5 @@
-package CellularAutomata;
+package life;
 
-import CellularAutomata.Cell;
-import CellularAutomata.Grid;
 import java.awt.*;
 import java.util.Random;
 
@@ -14,11 +12,17 @@ import java.util.Random;
  * as subscribers.
  */
 
-public class CellularAutomataCell extends Cell {
+/**
+ * Name: Agrika
+ * Changes: Complete Cellular Automaton Cell implementation/customization incl. reset(randomly), nextState(), update(), observe(), getAmbience() helper, and initialization
+ * Date: 17/3/2024
+ */
+
+public class Agent extends Cell {
     Color color=Color.RED;
     int status=0;
     int ambience=0;
-    public CellularAutomataCell(CellularAutomata myGrid, int a, int b) {
+    public Agent(Society myGrid, int a, int b) {
         super(myGrid, a, b);
         notifySubscribers();
     }
@@ -35,17 +39,18 @@ public class CellularAutomataCell extends Cell {
 
     @Override
     public void observe() {
-        ambience= 0;
-        for (Cell neighbor : neighbors) {
-            if (neighbor.getStatus() == 1) {
-                ambience++;
-            }
-        }
+        getAmbience();
         notifySubscribers();
     }
 
     public int getAmbience() {
-        observe();
+        ambience= 0;
+        neighbors=myGrid.getNeighbors(this,1);
+        for (Cell neighbor : neighbors) {
+            if (myGrid.getStatus(neighbor) == 1) {
+                ambience++;
+            }
+        }
         return ambience;
     }
 
@@ -55,16 +60,17 @@ public class CellularAutomataCell extends Cell {
     }
     @Override
     public void update() {
-        if (ambience>=0 && ambience<=1){
-            reset(false);
-        } else if (ambience >=4 && ambience<=8) {
-            reset(false);
-        } else if (ambience==3) {
+        if (Society.death.contains(ambience)){
+            status=0;
+            color=Color.RED;
+        } else if (Society.rebirth.contains(ambience)) {
             status=1;
             color=Color.GREEN;
         }
         notifySubscribers();
     }
+
+
     @Override
     public void nextState() {
         if (status==0) {
@@ -72,8 +78,7 @@ public class CellularAutomataCell extends Cell {
             status=1;
         }
         else if (status==1) {
-            color = Color.RED;
-            status=0;
+            reset(false);
         }
         notifySubscribers();
     }

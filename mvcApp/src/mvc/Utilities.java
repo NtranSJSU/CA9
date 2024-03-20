@@ -16,6 +16,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 
 public class Utilities {
     public Utilities() {
@@ -87,4 +89,23 @@ public class Utilities {
 
         return result;
     }
+
+
+    public static void save(Model model, Boolean saveAs) {
+        String fName = model.getFileName();
+        if (fName == null || !saveAs) {
+            fName = getFileName(fName,false);
+            model.setFileName(fName);
+        }
+        try {
+            ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(fName));
+            model.setUnsavedChanges(false);
+            os.writeObject(model);
+            os.close();
+        } catch (Exception err) {
+            model.setUnsavedChanges(true);
+            Utilities.error(err);
+        }
+    }
+
 }
