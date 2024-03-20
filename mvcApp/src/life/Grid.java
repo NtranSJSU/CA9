@@ -17,7 +17,7 @@ import mvc.*;
  */
 
 public abstract class Grid extends Model {
-    private static int time ; //time was static; i think that's not a good implementation- Agrika
+    private static int time ;
     protected int dim ;
     protected Cell[][] cells;
 
@@ -55,7 +55,7 @@ public abstract class Grid extends Model {
     // called when Populate button is clicked
     public void repopulate(boolean randomly) {
             // randomly set the status of each cell
-            time++;
+        //    time++;
             for (int row=0;row<dim;row++) {
                 for (int col = 0; col < dim; col++) {
                     cells[row][col].reset(randomly);
