@@ -11,16 +11,19 @@ import java.util.*;
 import java.io.*;
 import mvc.*;
 
+// Abstract class representing a cell in the grid
 abstract class Cell extends Publisher implements Serializable {
-    protected int row, col;
-    protected Set<Cell> neighbors = new HashSet<Cell>();
-    protected Grid myGrid;
-    protected Cell partner = null;
+    protected int row, col; // Position of the cell in the grid
+    protected Set<Cell> neighbors = new HashSet<Cell>(); // Set to store neighboring cells
+    protected Grid myGrid; // Reference to the grid this cell belongs to
+    protected Cell partner = null; // Reference to a neighboring cell as a partner
 
+    // Constructor for initializing cell's position and its grid
     public Cell(Grid myGrid,int a,int b){
         row=a;
         col=b;
         this.myGrid=myGrid;
+        // Obtain neighboring cells and notify subscribers about the cell's existence
         neighbors=myGrid.getNeighbors(this,1);
         notifySubscribers();
     }
@@ -28,30 +31,37 @@ abstract class Cell extends Publisher implements Serializable {
 
     // choose a random neighbor as a partner
     public void choosePartner() {
-        neighbors=myGrid.getNeighbors(this,1);
-        if (partner==null && neighbors != null) {
-            Cell[] array = new Cell[neighbors.size()];
-            neighbors.toArray(array);
+        neighbors=myGrid.getNeighbors(this,1); // Retrieve neighbors
+        if (partner==null && neighbors != null) // Check if there are neighbors available
+        {
+            Cell[] array = new Cell[neighbors.size()]; // Create an array to hold neighbors
+            neighbors.toArray(array); // Convert neighbors set to an array
             while (partner==null) {
-                int rand=(new Random()).nextInt(0,neighbors.size());
-                this.partner= array[rand];
+                int rand=(new Random()).nextInt(0,neighbors.size()); // Generate a random index
+                this.partner= array[rand]; // Assign a random neighbor as a partner
             }
         }
-        notifySubscribers();
+        notifySubscribers(); // Notify subscribers about the change
     }
 
-    public void unpartner() {
-        if (partner != null) {
-            if (partner.partner != null) {
-                partner.partner = null;
+    // Unlink the current cell from its partner
+    public void unpartner()
+    {
+        if (partner != null) // Check if the cell has a partner
+        {
+            if (partner.partner != null) // Check if the partner has another partner
+            {
+                partner.partner = null; // Unlink partner from its partner
             }
-            partner = null;
+            partner = null; // Unlink current cell from its partner
         }
-        notifySubscribers();
+        notifySubscribers(); // Notify subscribers about the change
     }
 
+    // Abstract method to get the color of the cell
     public abstract Color getColor();
 
+    // Abstract method to get the status of the cell
     public abstract int getStatus();
 
     // observer neighbors' states
