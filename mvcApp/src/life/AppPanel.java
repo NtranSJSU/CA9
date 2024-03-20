@@ -28,12 +28,14 @@ import java.io.*;
  * Date: 17/3/2024
  */
 
+// Main panel class responsible for displaying the application interface
 public class AppPanel extends JPanel implements Subscriber, ActionListener {
-    protected Model ca;
-    protected View view;
-    ControlPanel controls;
-    protected AppFactory appFactory;
+    protected Model ca; // Model object representing Cellular Automaton
+    protected View view; // View object representing the display view
+    ControlPanel controls; // ControlPanel object for user controls
+    protected AppFactory appFactory; // AppFactory object for app setup
 
+    // Constructor initializing the application panel
     public AppPanel(AppFactory appFactory1) {
         appFactory=appFactory1;
         this.ca = appFactory.makeModel();
@@ -53,6 +55,8 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener {
         World.PANEL_HEIGHT -= frame.getJMenuBar().getHeight();
         this.ca.subscribe(this);
     }
+
+    // Method to create the menu bar
     protected JMenuBar createMenuBar() {
         JMenuBar result = new JMenuBar();
         JMenu fileMenu = Utilities.makeMenu("File", new String[]{"New", "Save", "Open", "Quit"}, this);
@@ -64,6 +68,7 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener {
         return result;
     }
 
+    // Method to set a new model for the panel
     public void setModel(Model newModel) {
         this.ca.unsubscribe(this);
         this.ca = newModel;
@@ -74,6 +79,7 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener {
         ca.changed();
     }
 
+    // Action event handling method
     public void actionPerformed(ActionEvent ae) {
         String act = ae.getActionCommand();
         try {
@@ -126,12 +132,13 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener {
         }
     }
 
-
+    // Method to update the panel
     @Override
     public void update() {
         repaint();
     }
 
+    // Control panel class responsible for holding controls
     static class ControlPanel extends JPanel {
         public ControlPanel() {
             setLayout(new GridLayout(2,2,50,50));
