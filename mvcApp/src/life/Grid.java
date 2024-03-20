@@ -34,6 +34,7 @@ public abstract class Grid extends Model {
     public Grid() { this(20);
     }
     public void clear() {
+        time=0;
         for (int row = 0; row < dim; row++) {
             for (int col = 0; col < dim; col++) {
                 // Reset the state of each cell to its initial state
@@ -54,8 +55,8 @@ public abstract class Grid extends Model {
 
     // called when Populate button is clicked
     public void repopulate(boolean randomly) {
+            time=0;
             // randomly set the status of each cell
-        //    time++;
             for (int row=0;row<dim;row++) {
                 for (int col = 0; col < dim; col++) {
                     cells[row][col].reset(randomly);
