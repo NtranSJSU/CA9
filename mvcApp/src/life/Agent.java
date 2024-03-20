@@ -19,30 +19,64 @@ import java.util.Random;
  */
 
 public class Agent extends Cell {
+
+    //default color for the agent
     Color color=Color.RED;
+
+    //default status for the agent
     int status=0;
+
+    //default ambience for the agent
     int ambience=0;
+
+    /**
+     * Constructor for creating an agent at a specific position in the grid.
+     *
+     * @param myGrid The society/grid the agent belongs to.
+     * @param a      The x-coordinate of the agent.
+     * @param b      The y-coordinate of the agent.
+     */
     public Agent(Society myGrid, int a, int b) {
         super(myGrid, a, b);
         notifySubscribers();
     }
 
+    /**
+     * Retrieves the color of the agent.
+     *
+     * @return The color of the agent.
+     */
     @Override
     public Color getColor() {
         return color;
     }
 
+
+    /**
+     * Retrieves the status of the agent.
+     *
+     * @return The status of the agent.
+     */
     @Override
     public int getStatus() {
         return status;
     }
 
+    /**
+     * Observes the surrounding environment to determine ambience.
+     * Notifies subscribers after observing.
+     */
     @Override
     public void observe() {
         getAmbience();
         notifySubscribers();
     }
 
+    /**
+     * Calculates the ambience of the agent based on its neighbors' statuses.
+     *
+     * @return The ambience value.
+     */
     public int getAmbience() {
         ambience= 0;
         neighbors=myGrid.getNeighbors(this,1);
@@ -54,10 +88,18 @@ public class Agent extends Cell {
         return ambience;
     }
 
+    /**
+     * Interacts with neighboring cells.
+     */
     @Override
     public void interact() {
 
     }
+
+    /**
+     * Updates the status and color of the agent based on its ambience.
+     * Notifies subscribers after updating.
+     */
     @Override
     public void update() {
         if (Society.death.contains(ambience)){
@@ -71,6 +113,10 @@ public class Agent extends Cell {
     }
 
 
+    /**
+     * Moves the agent to its next state.
+     * Notifies subscribers after moving to the next state.
+     */
     @Override
     public void nextState() {
         if (status==0) {
@@ -82,6 +128,14 @@ public class Agent extends Cell {
         }
         notifySubscribers();
     }
+
+
+    /**
+     * Resets the agent's status and color, either randomly or to default values.
+     *
+     * @param randomly If true, reset the agent's status and color randomly.
+     *                 If false, reset to default values.
+     */
     @Override
     public void reset(boolean randomly) {
         if (!randomly) {
