@@ -1,3 +1,6 @@
+package mvc;
+
+import java.io.Serializable;
 /*
  * Date: March 6th 2024
  * Name: Nhat Tran
@@ -8,9 +11,6 @@
  * Name: Agrika Gupta
  * Version: 0.1
  * Changes: Serializable interface implementation,publisher extension */
-package mvc;
-
-import java.io.Serializable;
 
 public abstract class Model extends Publisher implements Serializable {
     private static final long serialVersionUID = 1L;

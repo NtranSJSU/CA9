@@ -3,13 +3,6 @@
 // (powered by FernFlower decompiler)
 //
 
-/*
- * Date: March 6th 2024
- * Name: Nhat Tran
- * Version: 0.1
- * Changes: Adding Utilities.java
- * */
-
 package mvc;
 
 import javax.swing.*;
@@ -18,6 +11,13 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
+/*
+ * Date: March 6th 2024
+ * Name: Nhat Tran
+ * Version: 0.1
+ * Changes: Adding Utilities.java
+ * */
+
 
 public class Utilities {
     public Utilities() {

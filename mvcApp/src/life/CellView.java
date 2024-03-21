@@ -1,9 +1,3 @@
-/*
- * Date: March 6th 2024
- * Name: Nhat Tran
- * Version: 0.1
- * Changes: Implementing CellView.java
- * */
 package life;
 
 import javax.swing.*;
@@ -11,6 +5,12 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
 import mvc.*;
+/*
+ * Date: March 6th 2024
+ * Name: Nhat Tran
+ * Version: 0.1
+ * Changes: Implementing CellView.java
+ * */
 
 /**
  * Name: Agrika

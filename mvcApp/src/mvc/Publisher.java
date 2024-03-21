@@ -1,13 +1,13 @@
+package mvc;
+
+import java.util.ArrayList;
+import java.util.List;
 /*
  * Date: March 6th 2024
  * Name: Nhat Tran
  * Version: 0.1
  * Changes: Implementing Publisher.java
  * */
-package mvc;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Publisher {
 

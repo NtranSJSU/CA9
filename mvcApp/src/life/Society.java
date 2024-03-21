@@ -1,13 +1,13 @@
+package life;
+
+import java.util.HashSet;
+import java.util.Set;
 /*
  * Date: March 6th 2024
  * Name: Nhat Tran
  * Version: 0.1
  * Changes: Implementing CellularAutomata.java
  * */
-package life;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Name: Agrika Gupta

@@ -1,14 +1,15 @@
+package life;
+
+import mvc.*;
+
+import java.awt.*;
 /*
  * Date: March 6th 2024
  * Name: Nhat Tran
  * Version: 0.1
  * Changes: Implementing GridView.java
  * */
-package life;
 
-import mvc.*;
-
-import java.awt.*;
 /**
  * Name: Agrika
  * Changes: Complete CellView implementation incl. setModel override

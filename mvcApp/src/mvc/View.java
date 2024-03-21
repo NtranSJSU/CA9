@@ -1,3 +1,6 @@
+package mvc;
+
+import javax.swing.*;
 /*
  * Date: March 6th 2024
  * Name: Nhat Tran
@@ -8,9 +11,6 @@
  * Name: Agrika Gupta
  * Version: 0.1
  * Changes: Adding a pointer to the model */
-package mvc;
-
-import javax.swing.*;
 
 public class View extends JPanel implements Subscriber {
     protected Model model;

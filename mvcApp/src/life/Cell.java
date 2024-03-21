@@ -1,15 +1,15 @@
-/*
-* Date: March 6th 2024
-* Name: Nhat Tran
-* Version: 0.1
-* Changes: Implementing Cell.java
-* */
 package life;
 
 import java.awt.*;
 import java.util.*;
 import java.io.*;
 import mvc.*;
+/*
+ * Date: March 6th 2024
+ * Name: Nhat Tran
+ * Version: 0.1
+ * Changes: Implementing Cell.java
+ * */
 
 // Abstract class representing a cell in the grid
 abstract class Cell extends Publisher implements Serializable {

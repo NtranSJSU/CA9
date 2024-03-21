@@ -3,6 +3,7 @@
 // (powered by FernFlower decompiler)
 //
 
+package mvc;
 /*
  * Date: March 6th 2024
  * Name: Nhat Tran
@@ -10,7 +11,6 @@
  * Changes: Adding World.java
  * */
 
-package mvc;
 
 public class World {
     public static final int T_SIZE = 52;

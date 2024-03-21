@@ -4,14 +4,19 @@ import mvc.AppFactory;
 import mvc.Command;
 import mvc.Model;
 import mvc.View;
-
+/*
+ * Date: March 20th 2024
+ * Name: Nhat Tran
+ * Version: 1.0
+ * Changes: Adjusting Help Button's Functionality
+ * */
 public class GridFactory implements AppFactory {
     String title="CELLULAR AUTOMATA: LIFE";
     String about="CellularAutomata v0.1";
     String[] help=new String[]{
-            "Run1: Read the inputted file and post it in the bottom right",
-            "Run50: Run50 the file shown and display the result on the top right",
-            "Clear: Clear the file from the program",
+            "Run1: Run Cellular Automata Simulation Once",
+            "Run50: Run Cellular Automata Simulation 50 times in a set interval",
+            "Clear: Reset all Cells back to original state, user can manually turns each cells on",
             "Populate: Randomly toggle cells"
     };
     String[] editCommands=new String[]{"Run1","Run50","Populate","Clear"};

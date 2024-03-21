@@ -1,14 +1,14 @@
+package life;
+
+import java.util.*;
+
+import mvc.*;
 /*
  * Date: March 6th 2024
  * Name: Nhat Tran
  * Version: 0.1
  * Changes: Implementing Grid.java
  * */
-package life;
-
-import java.util.*;
-
-import mvc.*;
 
 /**
  * Name: Agrika

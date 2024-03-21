@@ -1,9 +1,3 @@
-/*
- * Date: March 6th 2024
- * Name: Nhat Tran
- * Version: 0.1
- * Changes: Implementing AppPanel.java
- * */
 package life;
 
 import mvc.*;
@@ -13,7 +7,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-
+/*
+ * Date: March 6th 2024
+ * Name: Nhat Tran
+ * Version: 0.1
+ * Changes: Implementing AppPanel.java
+ * */
 /**
  * Name: Agrika Gupta
  * Date: 10/3/2024
@@ -27,6 +26,12 @@ import java.io.*;
  * making sure to set each cell view to new grid's respective cell.
  * Date: 17/3/2024
  */
+/*
+ * Date: March 20th 2024
+ * Name: Nhat Tran
+ * Version: 1.0
+ * Changes: Creating changes to the functionality of the Open button
+ * */
 
 // Main panel class responsible for displaying the application interface
 public class AppPanel extends JPanel implements Subscriber, ActionListener {
@@ -96,11 +101,18 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener {
                 case "Open" : {
                     if (Utilities.confirm("Are you sure?")) {
                         String fName = Utilities.getFileName(null, true);
-                        ObjectInputStream is = new ObjectInputStream(new FileInputStream(fName));
-                        ca =(Model)is.readObject();
-                        this.setModel(ca);
-                        ca.setFileName(fName);
-                        is.close();
+                        if (fName != null) {
+                            ca.setFileName(fName);
+                            FileInputStream fInput = new FileInputStream(fName);
+                            ObjectInputStream is = new ObjectInputStream(fInput);
+                            ca = (Model)(is.readObject());
+                            this.setModel(ca);
+                            fInput.close();
+                            is.close();
+                        } else {
+                            // Handle the case when fName is null
+                            Utilities.inform("File name can not be empty!");
+                        }
                     }
                     break;
                 }

@@ -1,10 +1,10 @@
+package life;
 /*
  * Date: March 6th 2024
  * Name: Nhat Tran
  * Version: 0.1
  * Changes: Implementing CAView.java
  * */
-package life;
 
 public class SocietyView extends GridView {
 

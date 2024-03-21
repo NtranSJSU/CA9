@@ -1,13 +1,13 @@
+package mvc;
+
+import javax.swing.*;
+import java.awt.event.WindowEvent;
 /*
  * Date: March 6th 2024
  * Name: Nhat Tran
  * Version: 0.1
  * Changes: Implementing SafeFrame.java
  * */
-package mvc;
-
-import javax.swing.*;
-import java.awt.event.WindowEvent;
 
 public class SafeFrame extends JFrame {
 
